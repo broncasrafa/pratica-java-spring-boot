@@ -1,6 +1,8 @@
 package com.rsfrancisco.course.resources;
 
+import com.rsfrancisco.course.entities.Order;
 import com.rsfrancisco.course.entities.User;
+import com.rsfrancisco.course.services.OrderService;
 import com.rsfrancisco.course.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,17 +18,25 @@ import java.util.List;
 public class UserResource {
 
     @Autowired
-    private UserService _service;
+    private UserService _userService;
+    @Autowired
+    private OrderService _orderService;
 
     @GetMapping
     public ResponseEntity<List<User>> findAll() {
-        List<User> users = _service.findAll();
+        List<User> users = _userService.findAll();
         return ResponseEntity.ok().body(users);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> findbyId(@PathVariable Long id) {
-        User user = _service.findById(id);
+    public ResponseEntity<User> findById(@PathVariable Long id) {
+        User user = _userService.findById(id);
         return ResponseEntity.ok().body(user);
+    }
+
+    @GetMapping(value="/{id}/orders")
+    public ResponseEntity<List<Order>> findAllOrdersByUserId(@PathVariable Long id) {
+        List<Order> userOrders = _orderService.findAllByUserId(id);
+        return ResponseEntity.ok().body(userOrders);
     }
 }

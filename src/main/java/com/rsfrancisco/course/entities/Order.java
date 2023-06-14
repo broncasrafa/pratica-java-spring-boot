@@ -1,5 +1,6 @@
 package com.rsfrancisco.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -14,6 +15,8 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant createdAt;
 
     // propriedade associativa
@@ -21,10 +24,13 @@ public class Order implements Serializable {
     @JoinColumn(name = "client_id")
     private User client = new User();
 
-    public Order() {}
-    public Order(Long id, User client) {
+    public Order() {
+    }
+    public Order(Long id, Instant createdAt, User client) {
         this.id = id;
         this.client = client;
+        this.createdAt = createdAt;
+        //this.createdAt = Instant.now();
     }
 
     public Long getId() {
