@@ -2,6 +2,7 @@ package com.rsfrancisco.course.configurations;
 
 import com.rsfrancisco.course.entities.Order;
 import com.rsfrancisco.course.entities.User;
+import com.rsfrancisco.course.entities.enums.OrderStatus;
 import com.rsfrancisco.course.repositories.OrderRepository;
 import com.rsfrancisco.course.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,12 +41,12 @@ public class TestConfiguration implements CommandLineRunner {
         _userRepository.saveAll(Arrays.asList(user1, user2, user3, user4, user5, user6, user7));
 
         // adding orders
-        Order order1 = new Order(null, Instant.parse("2023-06-14T10:55:22Z"), user3);
-        Order order2 = new Order(null, Instant.parse("2023-06-14T10:55:22Z"), user3);
-        Order order3 = new Order(null, Instant.parse("2023-06-14T10:55:22Z"), user1);
-        Order order4 = new Order(null, Instant.parse("2023-06-14T10:55:22Z"), user2);
-        Order order5 = new Order(null, Instant.parse("2023-06-14T10:55:22Z"), user4);
-        Order order6 = new Order(null, Instant.parse("2023-06-14T10:55:22Z"), user4);
+        Order order1 = new Order(null, Instant.parse("2023-06-14T10:55:22Z"), user3, OrderStatus.WAITING_PAYMENT);
+        Order order2 = new Order(null, Instant.parse("2023-06-14T10:55:22Z"), user3, OrderStatus.PAID);
+        Order order3 = new Order(null, Instant.parse("2023-06-14T10:55:22Z"), user1, OrderStatus.WAITING_PAYMENT);
+        Order order4 = new Order(null, Instant.parse("2023-06-14T10:55:22Z"), user2, OrderStatus.PAID);
+        Order order5 = new Order(null, Instant.parse("2023-06-14T10:55:22Z"), user4, OrderStatus.WAITING_PAYMENT);
+        Order order6 = new Order(null, Instant.parse("2023-06-14T10:55:22Z"), user4, OrderStatus.PAID);
         _orderRepository.saveAll(Arrays.asList(order1, order2, order3, order4, order5, order6));
     }
 }
