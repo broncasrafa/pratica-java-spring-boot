@@ -17,12 +17,17 @@ import java.util.List;
 public class OrderResource {
 
     @Autowired
-    private OrderService _service;
+    private OrderService _orderService;
 
     @GetMapping
     public ResponseEntity<List<Order>> findAll() {
-        List<Order> orders = _service.findAll();
+        List<Order> orders = _orderService.findAll();
         return ResponseEntity.ok().body(orders);
+    }
+
+    @GetMapping(value="/{id}")
+    public ResponseEntity<Order> findById(@PathVariable Long id) {
+        return ResponseEntity.ok().body(_orderService.findById(id));
     }
 
 }
