@@ -1,8 +1,10 @@
 package com.rsfrancisco.course.configurations;
 
+import com.rsfrancisco.course.entities.Category;
 import com.rsfrancisco.course.entities.Order;
 import com.rsfrancisco.course.entities.User;
 import com.rsfrancisco.course.entities.enums.OrderStatus;
+import com.rsfrancisco.course.repositories.CategoryRepository;
 import com.rsfrancisco.course.repositories.OrderRepository;
 import com.rsfrancisco.course.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,6 @@ import org.springframework.context.annotation.Profile;
 
 import java.time.Instant;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Configuration class for "test" profile, database seeding
@@ -27,6 +28,8 @@ public class TestConfiguration implements CommandLineRunner {
     private UserRepository _userRepository;
     @Autowired
     private OrderRepository _orderRepository;
+    @Autowired
+    private CategoryRepository _categoryRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -48,6 +51,30 @@ public class TestConfiguration implements CommandLineRunner {
         Order order5 = new Order(null, Instant.parse("2023-06-14T10:55:22Z"), user4, OrderStatus.WAITING_PAYMENT);
         Order order6 = new Order(null, Instant.parse("2023-06-14T10:55:22Z"), user4, OrderStatus.PAID);
         _orderRepository.saveAll(Arrays.asList(order1, order2, order3, order4, order5, order6));
+
+        // adding categories
+        Category c1 = new Category(null, "Electronics");
+        Category c2 = new Category(null, "Computers");
+        Category c3 = new Category(null, "Smart Home");
+        Category c4 = new Category(null, "Arts & Crafts");
+        Category c5 = new Category(null, "Automotive");
+        Category c6 = new Category(null, "Books");
+        Category c7 = new Category(null, "Baby");
+        Category c8 = new Category(null, "Beauty and personal care");
+        Category c9 = new Category(null, "Women's Fashion");
+        Category c10 = new Category(null, "Men's Fashion");
+        Category c11 = new Category(null, "Girls' Fashion");
+        Category c12 = new Category(null, "Boys' Fashion");
+        Category c13 = new Category(null, "Health and Household");
+        Category c14 = new Category(null, "Home and Kitchen");
+        Category c15 = new Category(null, "Industrial and Scientific");
+        Category c16 = new Category(null, "Luggage");
+        Category c17 = new Category(null, "Movies & Television");
+        Category c18 = new Category(null, "Pet supplies");
+        Category c19 = new Category(null, "Software");
+        Category c20 = new Category(null, "Video Games");
+        _categoryRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10,
+                                                  c11, c12, c13, c14, c15, c16, c17, c18, c19, c20));
     }
 }
 
