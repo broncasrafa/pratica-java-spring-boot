@@ -55,26 +55,10 @@ public class TestConfiguration implements CommandLineRunner {
         // adding categories
         Category c1 = new Category(null, "Electronics");
         Category c2 = new Category(null, "Computers");
-        Category c3 = new Category(null, "Smart Home");
-        Category c4 = new Category(null, "Arts & Crafts");
-        Category c5 = new Category(null, "Automotive");
-        Category c6 = new Category(null, "Books");
-        Category c7 = new Category(null, "Baby");
-        Category c8 = new Category(null, "Beauty and personal care");
-        Category c9 = new Category(null, "Women's Fashion");
-        Category c10 = new Category(null, "Men's Fashion");
-        Category c11 = new Category(null, "Girls' Fashion");
-        Category c12 = new Category(null, "Boys' Fashion");
-        Category c13 = new Category(null, "Health and Household");
-        Category c14 = new Category(null, "Home and Kitchen");
-        Category c15 = new Category(null, "Industrial and Scientific");
-        Category c16 = new Category(null, "Luggage");
-        Category c17 = new Category(null, "Movies & Television");
-        Category c18 = new Category(null, "Pet supplies");
-        Category c19 = new Category(null, "Software");
-        Category c20 = new Category(null, "Video Games");
-        _categoryRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10,
-                                                  c11, c12, c13, c14, c15, c16, c17, c18, c19, c20));
+        Category c3 = new Category(null, "Books");
+        Category c4 = new Category(null, "Automotive");
+
+        _categoryRepository.saveAll(Arrays.asList(c1, c2, c3, c4));
     }
 }
 
