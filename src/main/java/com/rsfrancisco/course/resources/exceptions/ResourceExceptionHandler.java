@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.security.InvalidParameterException;
+
 @ControllerAdvice
 public class ResourceExceptionHandler {
 
@@ -25,6 +27,14 @@ public class ResourceExceptionHandler {
         String errorMessage = "Database error";
         HttpStatus statusCode = HttpStatus.BAD_REQUEST;
         StandardError error = new StandardError(statusCode.value(), errorMessage, exception.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(statusCode).body(error);
+    }
+
+    @ExceptionHandler(InvalidParameterException.class)
+    public ResponseEntity<StandardError> invalidParameter(InvalidParameterException exception, HttpServletRequest request) {
+        String errorMsg = "invalid parameter or parameter is missing";
+        HttpStatus statusCode = HttpStatus.BAD_REQUEST;
+        StandardError error = new StandardError(statusCode.value(), errorMsg, exception.getMessage(), request.getRequestURI());
         return ResponseEntity.status(statusCode).body(error);
     }
 }
