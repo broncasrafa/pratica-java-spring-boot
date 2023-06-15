@@ -103,6 +103,15 @@ public class TestConfiguration implements CommandLineRunner {
         OrderItem oi6 = new OrderItem(order5, prod8, 2, prod8.getPrice());
         OrderItem oi7 = new OrderItem(order6, prod5, 2, prod5.getPrice());
         _orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4, oi5, oi6, oi7));
+
+        // adding payments
+        Payment pay1 = new Payment(null, Instant.parse("2023-06-14T11:40:22Z"), order2);
+        Payment pay2 = new Payment(null, Instant.parse("2023-06-14T13:10:22Z"), order4);
+        Payment pay3 = new Payment(null, Instant.parse("2023-06-14T11:00:22Z"), order6);
+        order2.setPayment(pay1);
+        order4.setPayment(pay2);
+        order6.setPayment(pay3);
+        _orderRepository.saveAll(Arrays.asList(order2, order4, order6));
     }
 }
 
