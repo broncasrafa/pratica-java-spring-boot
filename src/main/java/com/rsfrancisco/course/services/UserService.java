@@ -2,8 +2,11 @@ package com.rsfrancisco.course.services;
 
 import com.rsfrancisco.course.entities.User;
 import com.rsfrancisco.course.repositories.UserRepository;
+import com.rsfrancisco.course.services.exceptions.DatabaseException;
 import com.rsfrancisco.course.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +32,13 @@ public class UserService {
     }
 
     public void delete(Long userId) {
-        _userRepository.deleteById(userId);
+        try {
+            _userRepository.deleteById(userId);
+        } catch (EmptyResultDataAccessException ex) {
+            throw new ResourceNotFoundException(userId);
+        } catch (DataIntegrityViolationException ex) {
+            throw new DatabaseException(ex.getMessage());
+        }
     }
 
     public User update(Long userid, User user) {
