@@ -1,4 +1,4 @@
-package com.rsfrancisco.course.viewmodels.request;
+package com.rsfrancisco.course.resources.viewmodels.request;
 
 public class UserUpdatePassword {
     private String password;
