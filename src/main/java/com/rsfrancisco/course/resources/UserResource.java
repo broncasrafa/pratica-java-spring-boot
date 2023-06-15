@@ -4,6 +4,7 @@ import com.rsfrancisco.course.entities.Order;
 import com.rsfrancisco.course.entities.User;
 import com.rsfrancisco.course.services.OrderService;
 import com.rsfrancisco.course.services.UserService;
+import com.rsfrancisco.course.viewmodels.request.UserUpdatePassword;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -52,9 +53,16 @@ public class UserResource {
         _userService.delete(id);
         return ResponseEntity.noContent().build();
     }
-//    @PutMapping
-//    public ResponseEntity<User> updateUser(@RequestBody User model) {
-//
-//    }
 
+    @PutMapping(value="/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User model) {
+        User updatedUser = _userService.update(id, model);
+        return ResponseEntity.ok().body(updatedUser);
+    }
+
+    @PutMapping(value="/{id}/password")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserUpdatePassword model) {
+        User updatedUser = _userService.updatePassword(id, model.getPassword());
+        return ResponseEntity.ok().body(updatedUser);
+    }
 }

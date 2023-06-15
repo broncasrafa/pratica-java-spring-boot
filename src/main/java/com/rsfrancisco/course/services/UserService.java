@@ -30,4 +30,17 @@ public class UserService {
     public void delete(Long userId) {
         _userRepository.deleteById(userId);
     }
+
+    public User update(Long userid, User user) {
+        User entity = _userRepository.getReferenceById(userid); // prepara o objeto monitorado para você mexer e depois efetuar alguma operação no DB
+        entity.setEmail(user.getEmail());
+        entity.setName(user.getName());
+        entity.setPhone(user.getPhone());
+        return _userRepository.save(entity);
+    }
+    public User updatePassword(Long userid, String password) {
+        User entity = _userRepository.getReferenceById(userid); // prepara o objeto monitorado para você mexer e depois efetuar alguma operação no DB
+        entity.setPassword(password);
+        return _userRepository.save(entity);
+    }
 }
