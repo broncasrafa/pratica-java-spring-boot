@@ -35,14 +35,15 @@ public class Order implements Serializable {
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
 
-    public Order() {
-    }
+    public Order() {}
     public Order(Long id, Instant createdAt, User client, OrderStatus orderStatus) {
         this.id = id;
         this.client = client;
         this.createdAt = createdAt;
         setOrderStatus(orderStatus);
     }
+
+
 
     public Long getId() {
         return id;
@@ -57,6 +58,7 @@ public class Order implements Serializable {
     public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
+
 
     public User getClient() {
         return client;
@@ -80,12 +82,23 @@ public class Order implements Serializable {
         return items;
     }
 
+
     public Payment getPayment() {
         return payment;
     }
     public void setPayment(Payment payment) {
         this.payment = payment;
     }
+
+
+    public Double getTotal() {
+        double sum = 0.0;
+        for (OrderItem item : items) {
+            sum += item.getSubTotal();
+        }
+        return sum;
+    }
+
 
     @Override
     public boolean equals(Object o) {
